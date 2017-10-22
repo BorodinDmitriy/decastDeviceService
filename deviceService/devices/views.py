@@ -28,6 +28,7 @@ class DeviceList(APIView):
       return Response(serializer.data,status=status.HTTP_201_CREATED)
     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
   
+# devices/<id>
 class DeviceDetail(APIView):
   def get_object(self,id):
     try:
@@ -53,7 +54,7 @@ class DeviceDetail(APIView):
     snippet.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
   
-  
+# users/<id>/devices/
 class DevicesByUserId(APIView):
   def get(self, request, id):
     user = User.objects.get(id=id)
@@ -85,6 +86,7 @@ class DevicesByUserId(APIView):
       return Response(status=status.HTTP_201_CREATED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
   
+# devices/<id>/readings
 class DeviceReadings(APIView):
   def get(self, request, id):
     device = Device.objects.get(id=id)
